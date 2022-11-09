@@ -30,7 +30,7 @@ parser.add_argument('outputfile', type=str,
 parser.add_argument('bvalues', nargs='+', type=float,
     help='B-Values vector separated by spaces (i.e: 1000 2000 3000). Number must match the shells in [samples]')
 parser.add_argument('--overwrite',
-    help='Overwrite ouput file is exist', action='store_true')
+    help='Overwrite ouput file if exist', action='store_true')
 
 args = parser.parse_args()
 
@@ -79,8 +79,9 @@ if len(args.bvalues) != n_shells:
         n_shells, args.samples.name, len(args.bvalues)))
 
 # Scale the diffusion gradient according to the bvalues
+b_max = float(max(args.bvalues))
 for i in range(n_dir):
-    b = args.bvalues[shells[i]-1]
+    b = args.bvalues[shells[i]-1]/b_max
     # Seems that GE reverse the x-gradient (see README.md)
     u_x[i] = - u_x[i] * math.sqrt(b)
     u_y[i] = u_y[i] * math.sqrt(b)
@@ -88,9 +89,9 @@ for i in range(n_dir):
 
 # Write the tensor.dat
 
-# For convenience, and is the number of direction > 6 we write a 6 b=0 direction
-# that you could use for a reverse polarity sequence.
 with open(args.outputfile, 'w') as f:
+    # For convenience, and if the number of directions > 6 we write a
+    # 6 b=0 directions scheme that you could use for a reverse polarity sequence.
     f.write('6\n')
     for i in range(6):
         f.write('0 0 0\n')
