@@ -8,6 +8,8 @@ to a tensorXXX.dat file you can use for DTI sequences on a GE MRI System.
 
 As usual it's "AS IS" and for research only !
 
+Please read the Tests part of this README carefully.
+
 ## Cite
 
 Please kindly cite the following relevant article when you use
@@ -47,7 +49,22 @@ In a DTI sequence :
 
 This script was tested on a 3T MRI SIGNA PREMIER system (MR29.1).
 
-Using the same sampling described in the Usage section, here are the bvec/bval obtained after
-converting the DICOM using [dcm2niix](https://github.com/rordenlab/dcm2niix)
+Using the same sampling described in the Usage section, here is the results of
+the comparison of the bvec/bval files obtained after converting the DICOM using 
+[dcm2niix](https://github.com/rordenlab/dcm2niix) and the original samples.txt file.
 
+This result is given by the `tests/test.py` script :
+```
+DIR12 Found bvalues mismatch : expected 2000 / got 2005.0
+DIR12 Found direction mismatch in X : expected 0.74 / got 0.739077
+DIR12 Found direction mismatch in Y : expected 0.597 / got 0.596255
+DIR12 Found direction mismatch in Z : expected 0.312 / got 0.311611
+DIR63 Found bvalues mismatch : expected 3000 / got 3005.0
+DIR63 Found direction mismatch in X : expected -0.522 / got -0.521566
+DIR63 Found direction mismatch in Y : expected 0.61 / got 0.609492
+DIR63 Found direction mismatch in Z : expected 0.597 / got 0.596503
+```
+
+As you can see there are some case where there is probably some rounding errors of the b-values.
+I still need to investigate on how to mitigate this.
 
