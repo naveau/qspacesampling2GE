@@ -1,4 +1,4 @@
-# q-space-sampling to GE
+# Q-Space-Sampling to GE
 
 This script allows you to convert a `samples.txt` file generated
 from the [Emmanuel Caruyer's web application](http://www.emmanuelcaruyer.com/q-space-sampling.php)
@@ -38,9 +38,9 @@ cp tensorXXX.dat /usr/g/bin/tensor666.dat
 In a DTI sequence :
 - Set the number of direction to the number you setup in the Q-space-sampling scheme
 - Set the b-value to the maximum b-value of your shell
-[Diffusion-setup](docs/q-space-sampling_diffusion-setup.png)
+![Diffusion-setup](docs/q-space-sampling_diffusion-setup.png)
 - use the advanced panel to setup the tensor file number.
-[Advanced-setup](docs/q-space-sampling_advanced-setup.png)
+![Advanced-setup](docs/q-space-sampling_advanced-setup.png)
 
 
 ## Tests
