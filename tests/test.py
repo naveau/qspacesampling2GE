@@ -1,3 +1,5 @@
+import math
+
 # Read the samples file and do some sanity check
 shells = []
 u_x = []
@@ -40,17 +42,21 @@ with open('GE_dcm2niix.bval', 'r') as f:
     ge_b = [float(b) for b in ge_b[1:]]
 
 for i in range(len(expected_bvals)):
+
     if expected_bvals[i] != ge_b[i]:
         print("DIR{} Found bvalues mismatch : expected {} / got {}".format(
             i, expected_bvals[i], ge_b[i]))
-    if u_x[i] != ge_x[i]:
+
+    # test direction to 0.001 (precision of the q-space-sampling file)
+    if abs(u_x[i] - ge_x[i]) > 0.001:
         print("DIR{} Found direction mismatch in X : expected {} / got {}".format(
             i, u_x[i], ge_x[i]))
-    if u_y[i] != ge_y[i]:
+    if abs(u_y[i] - ge_y[i]) > 0.001:
         print("DIR{} Found direction mismatch in Y : expected {} / got {}".format(
             i, u_y[i], ge_y[i]))
-    if u_z[i] != ge_z[i]:
+    if abs(u_z[i] - ge_z[i]) > 0.001:
         print("DIR{} Found direction mismatch in Z : expected {} / got {}".format(
             i, u_z[i], ge_z[i]))
 
 
+print('If nothing written before this line, it seems good !')

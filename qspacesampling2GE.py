@@ -82,13 +82,16 @@ if len(args.bvalues) != n_shells:
 b_max = float(max(args.bvalues))
 for i in range(n_dir):
     b = args.bvalues[shells[i]-1]/b_max
+
+    # The norm of is probably not exactly one so we will rescale it
+    norm = math.sqrt(u_x[i] * u_x[i] + u_y[i] * u_y[i] + u_z[i] * u_z[i])
+
     # Seems that GE reverse the x-gradient (see README.md)
-    u_x[i] = - u_x[i] * math.sqrt(b)
-    u_y[i] = u_y[i] * math.sqrt(b)
-    u_z[i] = u_z[i] * math.sqrt(b)
+    u_x[i] = - u_x[i] * math.sqrt(b) / norm
+    u_y[i] = u_y[i] * math.sqrt(b) / norm
+    u_z[i] = u_z[i] * math.sqrt(b) / norm
 
 # Write the tensor.dat
-
 with open(args.outputfile, 'w') as f:
     # For convenience, and if the number of directions > 6 we write a
     # 6 b=0 directions scheme that you could use for a reverse polarity sequence.
