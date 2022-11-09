@@ -62,17 +62,9 @@ I choose to flip the sign of the x coordinate in the script to correct this.
 
 ### Rounding problems
 
-```
-DIR12 Found bvalues mismatch : expected 2000 / got 2005.0
-DIR12 Found direction mismatch in X : expected 0.74 / got 0.739077
-DIR12 Found direction mismatch in Y : expected 0.597 / got 0.596255
-DIR12 Found direction mismatch in Z : expected 0.312 / got 0.311611
-DIR63 Found bvalues mismatch : expected 3000 / got 3005.0
-DIR63 Found direction mismatch in X : expected -0.522 / got -0.521566
-DIR63 Found direction mismatch in Y : expected 0.61 / got 0.609492
-DIR63 Found direction mismatch in Z : expected 0.597 / got 0.596503
-```
+There are some case where the b-values is slightly off. It's probably because of rounding values. 
+Vectors coming from the q-space-sample app do not always have a norm of exactly 1. I choose to rescale
+the norm of the vector before generating the GE file and it seems that works.
 
-As you can see there are some case where there is probably some rounding errors of the b-values.
-I still need to investigate on how to mitigate this.
+Please check carefully the DICOM outputs if you use this script.
 
