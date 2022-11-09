@@ -53,7 +53,15 @@ Using the same sampling described in the Usage section, here is the results of
 the comparison of the bvec/bval files obtained after converting the DICOM using 
 [dcm2niix](https://github.com/rordenlab/dcm2niix) and the original samples.txt file.
 
-This result is given by the `tests/test.py` script :
+The results are given by the `tests/test.py` script (run it in the tests directory)
+
+### X coordinate sign
+
+The `u_x` given by the sampling scheme and the x coordinate obtained in the bvec file are reversed in sign.
+I choose to flip the sign of the x coordinate in the script to correct this.
+
+### Rounding problems
+
 ```
 DIR12 Found bvalues mismatch : expected 2000 / got 2005.0
 DIR12 Found direction mismatch in X : expected 0.74 / got 0.739077
