@@ -40,10 +40,10 @@ cp tensorXXX.dat /usr/g/bin/tensor666.dat
 In a DTI sequence :
 - Set the number of direction to the number you setup in the Q-space-sampling scheme
 - Set the b-value to the maximum b-value of your shell
-![Diffusion-setup](docs/q-space-sampling_diffusion-setup.png)
-- use the advanced panel to setup the tensor file number.
-![Advanced-setup](docs/q-space-sampling_advanced-setup.png)
+<img src="docs/q-space-sampling_diffusion-setup.png" width=30% alt="Diffusion-setup" />
 
+- use the advanced panel to setup the tensor file number.
+<img src="docs/q-space-sampling_advanced-setup.png" width=30% alt="Advanced-setup" />
 
 ## Tests
 
@@ -54,6 +54,13 @@ the comparison of the bvec/bval files obtained after converting the DICOM using
 [dcm2niix](https://github.com/rordenlab/dcm2niix) and the original samples.txt file.
 
 The results are given by the `tests/test.py` script (run it in the tests directory)
+
+You can use this script with your own schemes like that :
+```bash
+python test.py --help
+python test.py --samples samples.txt --bvec dcm2niix_nifti.bvec --bval dcm2niix_nifti.bval --bvalues 1000 2000 3000
+```
+`samples.txt` is the file download from the Q-Space-Sampling web app. `bvec/bval` files are the ones created by dcm2niix when converting your dicom to nifti. The script need to know the expected b-values you setup. It will skip the `bvec/bval` for any b=0.
 
 ### X coordinate sign
 
